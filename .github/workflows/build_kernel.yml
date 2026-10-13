@@ -210,7 +210,7 @@ jobs:
 
       - name: Download CI Core
         env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          GH_TOKEN: ${{ secrets.GH_TOKEN || github.token }}
         run: |
           ./scripts/fetch-ci-core.sh
 
