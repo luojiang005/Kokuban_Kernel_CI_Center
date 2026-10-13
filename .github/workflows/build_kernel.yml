@@ -224,7 +224,7 @@ jobs:
           ref: ${{ env.BRANCH_TARGET }}
           path: kernel_source
           submodules: recursive
-          token: ${{ secrets.GH_TOKEN }}
+          token: ${{ secrets.GH_TOKEN || github.token }}
 
       - name: Setup sccache
         uses: hendrikmuhs/ccache-action@v1.2.24
@@ -258,7 +258,7 @@ jobs:
 
       - name: Build and Release
         env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          GH_TOKEN: ${{ secrets.GH_TOKEN || github.token }}
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
         run: |
           ARGS=(--project "$PROJECT" --branch "$VARIANT" --do-release "$DO_RELEASE")
